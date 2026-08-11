@@ -8,6 +8,7 @@ export function simulateMatch(match: Match): Match {
     match.homeScore = firstTeamGoals;
     match.awayScore = secondTeamGoals;
     match.winner = firstTeamGoals > secondTeamGoals ? match.homeTeam : match.awayTeam;
+    match.status = "FINISHED";
     //правило выездного гола пока что. Ничья = победа гостей
     return match;
 }
