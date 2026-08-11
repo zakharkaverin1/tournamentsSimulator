@@ -1,0 +1,1 @@
+export type TournamentStageType = "GROUPS" | "LEAGUE" | "KNOCKOUT";
