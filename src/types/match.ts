@@ -8,6 +8,6 @@ export interface Match {
     homeScore?: number;
     awayScore?: number;
     status: "SCHEDULED" | "FINISHED";
-    winner?: Team;
+    winner?: Team | undefined;
     venue?: Venue;
 }
