@@ -9,6 +9,8 @@ interface NavbarProps {
 
 const Navbar = (props: NavbarProps) => {
     const {onChange} = props;
+
+
     return (
         <nav className={styles.navbar}>
             <Button children={"Tournaments"} onClick={() => onChange("tournament")}/>

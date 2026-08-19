@@ -32,4 +32,4 @@ const champion = simulateKnockout(teams);
 
 console.log("\nChampion:");
 console.log(champion.name);
-console.log(  "Level:", champion.level);
+console.log("Level:", champion.level);

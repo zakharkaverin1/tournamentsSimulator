@@ -67,10 +67,10 @@ const mockVenues: Venue[] = [
     },
 ];
 
-export const getData = (section: string) => {
+export const getData = (type: string) => {
     return new Promise((resolve) => {
         setTimeout(() => {
-            switch (section) {
+            switch (type) {
                 case "player": resolve([...mockPlayers]); break;
                 case "team": resolve([...mockTeams]); break;
                 case "venue": resolve([...mockVenues]); break;

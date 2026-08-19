@@ -1,9 +1,11 @@
+import * as React from "react";
 
 interface ButtonProps {
     className?: string;
     type?: 'button' | 'submit' | 'reset';
     children: React.ReactNode;
     onClick?: React.MouseEventHandler<HTMLButtonElement>;
+    disabled?: boolean;
 }
 
 const Button = (props: ButtonProps) => {
@@ -12,13 +14,15 @@ const Button = (props: ButtonProps) => {
         type = 'button',
         children,
         onClick,
+        disabled,
     } = props
 
     return (
         <button
-            className={`$/* {styles.button}*/ ${className}`}
+            className={` ${className}`}
             type={type}
             onClick={onClick}
+            disabled={disabled}
         >
             {children}
         </button>

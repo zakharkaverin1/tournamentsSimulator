@@ -1,39 +1,38 @@
 import * as React from "react";
-import { useEffect } from "react";
 import Navbar from "../components/Navbar/Navbar.tsx";
-import { getData } from "../mockData/data.ts";
+import Button from "../components/Button/Button.tsx";
+import Modal from "../components/Modal/Modal.tsx";
+import AddForm from "../components/AddForm/AddForm.tsx";
+import { useData } from "../hooks/useData";
+import List from "../components/List/List.tsx";
 
 export const MainPage = () => {
-    const [currentSection, setCurrentSection] = React.useState<string>("team");
-    const [currentItems, setCurrentItems] = React.useState<any[]>([]);
-    const [loading, setLoading] = React.useState(false);
+    const [currentType, setCurrentType] = React.useState<string>("team");
+    const [addModalOpen, setAddModalOpen] = React.useState<boolean>(false);
+    const { items: currentItems, loading, error } = useData(currentType);
 
-    useEffect(() => {
-        const loadData = async () => {
-            setLoading(true);
-            const items = await getData(currentSection) as any[];
-            setCurrentItems(items);
-            setLoading(false);
-        };
-
-        loadData();
-    }, [currentSection]);
+    if (error) {
+        return <div>Error: {error.message}</div>;
+    }
 
     return (
         <main>
             <h1>Tournament Simulator</h1>
-            <Navbar onChange={setCurrentSection} />
+            <Navbar onChange={setCurrentType} />
+
+            <Modal isOpen={addModalOpen} onClose={() => setAddModalOpen(false)}>
+                <AddForm addType={currentType} />
+            </Modal>
 
             {loading ? (
-                <div>Загрузка...</div>
+                <div>loading...</div>
             ) : (
-                <div>
-                    {currentItems.map((item) => (
-                        <div key={item.id}>
-                            {item.name || `${item.firstName} ${item.lastName}`}
-                        </div>
-                    ))}
-                </div>
+                <>
+                    <List type={currentType} items={currentItems} />
+                    <Button onClick={() => setAddModalOpen(true)}>
+                        +
+                    </Button>
+                </>
             )}
         </main>
     );
